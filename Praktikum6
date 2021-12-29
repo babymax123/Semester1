@@ -1,0 +1,80 @@
+#include <stdio.h>
+
+#include <string.h>
+
+
+
+void main(){
+
+  int n;
+
+  FILE *nim,*nama;
+
+  char input_nama[10],input_nim[6],data_nama[10],data_nim[6];
+
+
+
+  printf("Masukkan jumlah mahasiswa : ");
+
+  scanf("%d",&n);
+
+
+
+  nim = fopen("nim.txt", "a+");
+
+  nama = fopen("nama.txt", "a+");
+
+
+
+  printf("---------------------------\n");
+
+  for(int i=0;i<n;i++){
+
+      printf("Masukkan nim mahasiswa ke - %d : ",i);
+
+      scanf("%s",input_nim);
+
+      fputs(input_nim, nim);
+
+      fputc('\n', nim);
+
+      printf("Masukkan nama mahasiswa ke - %d : ",i);
+
+      scanf("%s",input_nama);
+
+      fputs(input_nama, nama);
+
+      fputc('\n', nama);
+
+      printf("---------------------------\n");
+
+  }
+
+  printf("---------------------------\n");
+
+  fclose(nim);
+
+  fclose(nama);
+
+  nim = fopen("nim.txt", "r+");
+
+  nama = fopen("nama.txt", "r+");
+
+  while(fgets(data_nim,8,nim) != NULL && fgets(data_nama,12,nama) != NULL){
+
+      data_nim[strcspn(data_nim, "\n")] = 0;
+
+      data_nama[strcspn(data_nama, "\n")] = 0;
+
+      printf("%s : %s\n",data_nim,data_nama);
+
+  }
+
+
+
+  fclose(nim);
+
+  fclose(nama);
+
+}
+
