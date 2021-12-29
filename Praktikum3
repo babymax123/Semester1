@@ -1,0 +1,78 @@
+#include <stdio.h>
+
+main(){
+	
+	int menu ,harga ,i=1;
+	int totalpembelian = 0 ,totalbayar ,bayar, kembalian;
+	char kar='y';
+	
+	printf("======================================\n");
+	printf("\tWARUNG SEDERHANA MANTAP\n");
+	printf("======================================\n");
+	
+	printf("Silahkan Pilih Menunya : \n");
+	printf("\nNo. Menu\t Menu \t 	 Harga  \n");
+	printf("menu 1.\t\t Rawon \t 	 Rp15000  \n");
+	printf("menu 2.\t\t Nasi Pecel \t Rp8000  \n");
+	printf("menu 3.\t\t Es Teh \t Rp2500  \n");
+	
+	printf("======================================\n");
+	while(kar=='y')
+	{ 
+		printf("~~~~~~~~~~~~~~~~~~~~\n");
+		printf("Pilih menu ke : ");
+		scanf("%d",&menu);
+		fflush(stdin);
+		printf("~~~~~~~~~~~~~~~~~~~~\n");
+		if (menu==1)
+		{
+			harga = 15000;
+			printf("Harga Rawon = Rp. %d\n\n",harga);
+		}
+		else if (menu==2)
+		{
+			harga = 8000;
+			printf("Harga Nasi Pecel = Rp. %d\n\n",harga);
+		}
+		else if(menu==3)
+		{
+			harga = 2500;
+			printf("Harga Es Teh = Rp. %d\n\n",harga);
+		}
+		
+		else 
+		{
+			printf("input menu salah\n");
+		}
+	totalpembelian=totalpembelian + harga;
+	printf("Mau Tambah Lagi? [y/t] = ");
+	scanf("%c",&kar);
+	i++;
+	
+	}
+	printf("--------------------------------------");
+	printf("\nTOTAL PEMBELIAN 	=Rp. %d\n",totalpembelian);	
+	
+	totalbayar =totalpembelian;
+	printf("\nGRAND TOTAL		=Rp. %d\n",totalbayar);
+	printf("TUNAI			=Rp. ");
+	scanf("%d",&bayar);
+	
+	kembalian = bayar - totalbayar;
+	
+	if(bayar > totalbayar)
+	{
+		printf("Uang Kembalian Anda 	=Rp. %d\n",kembalian);
+	}
+	else
+	{
+		printf("Uang Anda Kurang 	=Rp. %d\n",totalbayar - bayar);
+	}
+	
+	
+	printf("================================================\n");
+	printf("\tTERIMA KASIH TELAH BERBELANJA DI\n");
+	printf("\tWARUNG SEDERHANA MANTAP\n");
+	printf("================================================\n");
+	
+}
