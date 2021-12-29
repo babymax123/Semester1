@@ -1,0 +1,157 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdbool.h>
+
+int pilihan, jmlh_mhs, i;
+char nim_jmlh_inpt;
+char nim_sementara[50];
+char nim[0][20];
+char nama[0][20];
+char kelas[0][20];
+char dosen[0][20];
+int duplikat, found;
+
+int main(){
+    atas:
+    system("cls");
+	printf("program pembuatan data I-Lab\n");
+	printf("=== Pilih menu ===\n");
+	printf("1. create Data \n");
+	printf("2. read Data \n");
+	printf("3. update Data \n");
+	printf("4. delete Data \n");
+	printf("5. exit progam \n");
+	printf("\n");
+	printf("masukkan pilihan : ");
+    scanf("%d" ,&pilihan);
+    switch (pilihan){
+    case 1:
+        system("cls");
+        printf(" === Create Data ===\n");
+        printf("\n Input NIM Praktikan\t\t\t: ");
+        scanf(" %[^\n]s" , nim_sementara);
+        duplikat = 0;
+        for(int i = 0; i < jmlh_mhs; i++){
+            if(strcmp(nim[i], nim_sementara) == 0){
+                duplikat = 1;
+            }
+        }
+        if (strlen(nim_sementara) > 10){
+            printf("\n --------------------\n");
+            printf("\n Inputan NIM tidak boleh melebihi 10 karakter.\n");
+            printf("\n --------------------\n");
+            printf(" Tekan enter untuk kembali ke menu...");
+            getch();
+            goto atas;
+        }
+        if(duplikat == false){
+            printf("\n Input Nama Praktikan\t\t\t: ");
+            scanf(" %[^\n]s", &nama[jmlh_mhs]);
+            printf("\n Input Kelas Pemrograman Dasar\t\t: ");
+            scanf(" %[^\n]s" , &kelas[jmlh_mhs]);
+            printf("\n Input Nama Dosen Pengampu\t\t: ");
+            scanf(" %[^\n]s" , &dosen[jmlh_mhs]);
+            strcpy(nim[jmlh_mhs], nim_sementara);
+            jmlh_mhs++;
+
+            printf("\n --------------------\n");
+            printf("\n Data Berhasil di Tambah.\n");
+            printf("\n --------------------\n");
+        } else {
+            printf("\n --------------------\n");
+            printf("\n Inputan NIM Terdeteksi Duplikat.\n");
+            printf("\n --------------------\n");
+        }
+        printf(" Tekan enter untuk kembali ke menu...");
+        getch();
+        goto atas;
+        break;
+
+    case 2:
+        system("cls");
+        printf("\n === List Data ===\n\n");
+        if( jmlh_mhs >= 1){
+            for(i = 0; i < jmlh_mhs; i++){
+                printf(" == %d ==", i + 1);
+                printf("\n\n NIM Praktikan\t\t\t: %s", nim[i]);
+                printf("\n\n Nama Praktikan\t\t\t: %s", nama[i]);
+                printf("\n\n Kelas Pemrograman Dasar\t: %s", kelas[i]);
+                printf("\n\n Dosen Pengampu\t\t\t: %s", dosen[i]);
+                printf("\n\n --------------------\n\n");
+            }
+        } else {
+            printf(" --------------------\n");
+            printf("\n Data Tidak Tersedia.\n");
+            printf("\n --------------------\n");
+        }
+        printf(" Tekan enter untuk kembali ke menu...");
+        getch();
+        goto atas;
+        break;
+
+    case 3:
+        system("cls");
+        printf(" === Update Data ===\n\n");
+        printf(" Masukkan NIM Praktikan yang Ingin di Edit Data nya : ");
+        scanf("%s",nim_sementara);
+        i=0; found = false;
+        while(i < jmlh_mhs && found == false){
+            if(strcmp(nim_sementara,nim[i]) == 0){
+                found = true;
+            }   i++;
+        }
+        if(found == false){
+            printf("\n --------------------\n");
+            printf("\n Data yang akan di update tidak tersedia\n");
+            printf("\n --------------------\n");
+        } else {
+            i--;
+            printf("\n Nama Baru\t\t\t: "); scanf(" %[^\n]s", nama[i]);
+            printf("\n Kelas Baru\t\t\t: "); scanf(" %[^\n]s", kelas[i]);
+            printf("\n Dosen Pengampu Baru\t\t: "); scanf(" %[^\n]s", dosen[i]);
+            printf("\n --------------------\n");
+            printf("\n Data Berhasil di Edit.\n");
+            printf("\n --------------------\n");
+        }
+        printf(" Tekan enter untuk kembali ke menu...");
+        getch();
+        goto atas;
+
+    case 4:
+        system("cls");
+        printf(" === Delete Data ===\n\n");
+        printf(" Masukkan NIM Praktikan yang Ingin di Delete Data nya : ");
+        scanf("%s",nim);
+        found = false; i = 0;
+        while(i < jmlh_mhs && found == false){
+            if(strcmp(nim,nim[i]) == 0){
+                found = true;
+            }   i++;
+        }
+        if(found == false){
+            printf("\n --------------------\n");
+            printf("\n Data Tidak di Temukan.\n");
+            printf("\n --------------------\n");
+        } else {
+            i--;
+            for(i = i; i <= jmlh_mhs; i++){
+                strcpy(nim[i], nim[i+1]);
+                strcpy(nama[i],nama[i+1]);
+                strcpy(kelas[i],kelas[i+1]);
+                strcpy(dosen[i],dosen[i+1]);
+            }
+            i--;
+            strcpy(nim[i],""); jmlh_mhs--;
+            printf("\n --------------------\n");
+            printf("\n Data Berhasil di Hapus.\n");
+            printf("\n --------------------\n");
+        }
+        printf(" Tekan enter untuk kembali ke menu...");
+        getch();
+        goto atas;
+        break;
+    case 5:
+        exit(0);
+    }
+}
